@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\BookCollection;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -14,25 +15,12 @@ class UserDashboardPageController extends Controller
     // Index function => merender dashboard page untuk user
     public function index()
     {
+        $book_tersedia = new BookCollection(Book::where('status', 'Tersedia')->paginate(10));
+
         return Inertia::render('Dashboard/DashboardUserPage', [
             "auth" => auth()->user(),
-            "book_tersedia" => Book::where('status', 'Tersedia')->get(),
+            "book_tersedia" => $book_tersedia,
             "buku_dipesan" => Book::where('status', "Dipinjam")->where('peminjam', auth()->user()->name)->get()
-        ]);
-    }
-
-    // Function untuk mengubah data ke Konfirmasi Peminjaman (fitur peminjaman)
-    public function store(Request $request, $id)
-    {
-        $data = Book::findOrFail($id);
-        $data->update([
-            'status' => 'Konfirmasi_pinjam',
-            'peminjam' => auth()->user()->name
-        ]);
-
-        return response()->json([
-            "status" => 200,
-            "message" => "Success Meminjam Buku"
         ]);
     }
 

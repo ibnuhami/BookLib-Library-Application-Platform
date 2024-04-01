@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DaftarBukuController;
 use App\Http\Controllers\ImportBookController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -24,18 +25,28 @@ use App\Http\Controllers\AdminDashboardPageController;
 
 Route::get('/', fn() => Inertia::render('Welcome'));
 
+// Route User
 // Dashboard User Route
 Route::middleware(['auth', 'CheckUser'])->group(function () {
     // Dashboard User Page Route
     Route::get('/dashboard', [UserDashboardPageController::class, 'index'])->name('userDashboard');
 
-    // Route Untuk Mengirim data buku akan dipinjam
-    Route::post('/dashboard/sistem/peminjamanbuku/{id}', [UserDashboardPageController::class, 'store'])->name('pinjambuku');
 
     // Route Konfirmasi Pengembalian Buku
     Route::post('/dashboard/sistem/konfirmasipengembalianbuku/{id}', [UserDashboardPageController::class, 'pengembalian_buku'])->name('kembalibuku');
 });
 
+// Route Daftar Buku Page
+Route::middleware(['auth'])->group(function () {
+    // Route Daftarbuku page
+    Route::get('/daftarbuku', [DaftarBukuController::class, 'index'])->name('daftarbukupage');
+
+    // Route Untuk Mengirim data buku akan dipinjam
+    Route::post('/dashboard/sistem/peminjamanbuku/{id}', [DaftarBukuController::class, 'store'])->name('pinjambuku');
+});
+
+
+// Route Admin
 // Dashboard Admin Route
 Route::middleware(['CheckAdmin', 'auth'])->group(function () {
     // Dashboard Admin Page Route
@@ -63,8 +74,9 @@ Route::middleware(['CheckAdmin', 'auth'])->group(function () {
     Route::delete('/admin/dashboardPage/sistem/deletebuku', [AdminDashboardPageController::class, 'destroy'])->name('deletebuku');
 });
 
+
 // Route Import Buku
-Route::middleware(['CheckAdmin', 'auth'])->group(function() {
+Route::middleware(['CheckAdmin', 'auth'])->group(function () {
     Route::get('/admin/importbuku', [ImportBookController::class, 'index'])->name('pageimportbuku');
     Route::post('/admin/importbuku', [ImportBookController::class, 'store'])->name('importbuku');
 });

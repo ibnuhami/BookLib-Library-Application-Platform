@@ -1,5 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
-import { router, useForm } from '@inertiajs/react';
+import { useForm } from '@inertiajs/react';
 import React, { useEffect, useState } from 'react'
 
 const ImportPage = (props) => {
@@ -10,7 +10,6 @@ const ImportPage = (props) => {
     })
 
     const [isAlert, setIsAlert] = useState(false)
-    console.log(isAlert)
 
     useEffect(() => {
         const data = Object.values(props.errors)
@@ -61,7 +60,7 @@ const ImportPage = (props) => {
 
     return (
         <AuthenticatedLayout
-            user='yes'
+            user={props.auth.user}
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Import Buku</h2>}
         >
 

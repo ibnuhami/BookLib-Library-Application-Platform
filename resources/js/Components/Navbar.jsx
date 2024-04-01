@@ -9,10 +9,13 @@ function Navbar({ auth }) {
                 return (
                     <>
                         <li><Link href={route('adminDashboard')} >Dashboard</Link></li>
+                        <li><Link href={route('pageimportbuku')} method='get' as='button' >Import Book</Link></li>
                     </>
                 )
             } else {
-                <li><Link href={route('userDashboard')} >Dashboard</Link></li>
+                return (
+                    <li><Link href={route('userDashboard')} >Dashboard</Link></li>
+                )
             }
         }
         if (user) {
@@ -27,7 +30,7 @@ function Navbar({ auth }) {
                                     </summary>
                                     <ul className="p-1 bg-white rounded-t-none">
                                         {CheckAdmin(user.isAdmin)}
-                                        <li><Link href={route('pageimportbuku')} method='get' as='button' >Import Book</Link></li>
+                                        <li><Link href={route('daftarbukupage')} method='get' as='button' >Daftar Buku</Link></li>
                                         <li><Link href={route('logout')} method='post' as='button' >Sign Out</Link></li>
                                     </ul>
                                 </details>
@@ -44,7 +47,7 @@ function Navbar({ auth }) {
         <>
             <div className="navbar bg-white text-gray-800">
                 <div className="flex-1">
-                    <Link className="btn btn-ghost text-xl text-gray-800" href="/">PerpusID</Link>
+                    <Link className="btn btn-ghost text-xl text-gray-800" href="/">Perpustakaan SMKN 21 Jakarta</Link>
                 </div>
                 {isAuth(auth)}
             </div>

@@ -8,8 +8,10 @@ export default function Welcome({ auth }) {
             return (
                 <>
                     <div className="max-w-md">
-                        <h1 className="text-5xl font-bold">PerpusID</h1>
-                        <p className="py-6">Website Mengelola buku pada Perpustakaan</p>
+                        <h1 className="text-5xl font-bold w-full">
+                            Perpustakaan Digital <br /> <span className='text-3xl'>SMKN 21 Jakarta</span>
+                        </h1>
+                        <p className="py-6">Perpustakaan digital SMK 21 Jakarta</p>
                     </div>
                 </>
             )

@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from '@inertiajs/react'
 
 function Navbar({ auth }) {
-    console.log(auth)
     const isAuth = (user) => {
         const CheckAdmin = (userCheck) => {
             if (userCheck) {

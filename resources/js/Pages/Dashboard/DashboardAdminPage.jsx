@@ -9,7 +9,6 @@ import TableBukuTersedia from '@/Components/AdminDashboard/Table/TableBukuTersed
 import Paginator from '@/Components/AdminDashboard/item/Paginator';
 
 function DashboardAdminPage(props) {
-    console.log(props)
     const [isAlert, setIsAlert] = useState(false)
 
     useEffect(() => {

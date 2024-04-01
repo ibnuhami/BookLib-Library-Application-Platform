@@ -3,7 +3,6 @@ import { useForm } from '@inertiajs/react';
 import React, { useEffect, useState } from 'react'
 
 const ImportPage = (props) => {
-    console.log(props)
 
     const { post, file, setData } = useForm({
         'file': null,
@@ -23,18 +22,13 @@ const ImportPage = (props) => {
 
     const submit = (e) => {
         e.preventDefault()
-        try {
-            post(route('importbuku'), file, {
-                forceFormData: true,
-            })
-        } catch (error) {
-            console.log('error', error)
-        }
+        post(route('importbuku'), file, {
+            forceFormData: true,
+        })
     }
 
     const alertError = (datas) => {
         const data = Object.values(datas)
-        console.log(typeof data)
         if (isAlert) {
             return (
                 <div role="alert" className="alert alert-error text-white mx-auto w-5/6">

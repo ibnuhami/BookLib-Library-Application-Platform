@@ -3,7 +3,6 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 import Paginator from '@/Components/AdminDashboard/item/Paginator'
 
 const DaftarBuku = (props) => {
-    console.log(props)
 
     const submit = (id) => {
         const url = route('pinjambuku', id)

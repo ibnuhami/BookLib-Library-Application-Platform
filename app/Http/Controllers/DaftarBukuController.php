@@ -20,15 +20,20 @@ class DaftarBukuController extends Controller
     // Function untuk mengubah data ke Konfirmasi Peminjaman (fitur peminjaman)
     public function store(Request $request, $id)
     {
-        $data = Book::findOrFail($id);
-        $data->update([
+        $user = auth()->user();
+        if ($user->jumlah_pinjam >= 2) {
+            return back()->with('message', 'Maaf, anda hanya dapat meminjam maksimal 2 buku');
+        }
+
+        $user->jumlah_pinjam++;
+        $user->save();
+
+        $buku = Book::findOrFail($id);
+        $buku->update([
             'status' => 'Konfirmasi_pinjam',
-            'peminjam' => auth()->user()->name
+            'peminjam' => $user->name
         ]);
 
-        return response()->json([
-            "status" => 200,
-            "message" => "Success Meminjam Buku"
-        ]);
+        return redirect()->back()->with('message', 'Permintaan peminjaman buku berhasil dikirim.');
     }
 }

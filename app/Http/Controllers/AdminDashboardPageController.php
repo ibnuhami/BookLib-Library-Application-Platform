@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\BookCollection;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -113,18 +114,33 @@ class AdminDashboardPageController extends Controller
         ]);
     }
 
+    // Function untuk pembatalan buku
+    public function pembatalan_pinjam_buku($id)
+    {
+        $data = Book::findOrFail($id);
+        $user = User::where('name', $data->peminjam)->first();
+        $user->jumlah_pinjam -= 1;
+        $user->save();
+
+        $data->update([
+            'status' => 'Tersedia',
+            'peminjam' => '-'
+        ]);
+    }
+
     // Function untuk pengembalian buku
     public function konfirmasi_pengembalian_buku($id)
     {
         $data = Book::findOrFail($id);
+        if (!$data) {
+            return back()->with('message', 'invalid data');
+        }
+
         Book::where('id', $id)->update([
             'status' => 'Tersedia',
             'peminjam' => '-'
         ]);
 
-        return response()->json([
-            "status" => 200,
-            "message" => 'Berhasil konfirmasi Pengembalian. Buku akan kembali Tersedia'
-        ]);
+        return back()->with('message', 'Berhasil konfirmasi Pengembalian. Buku akan kembali Tersedia');
     }
 }

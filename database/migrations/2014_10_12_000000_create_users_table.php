@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->boolean('isAdmin')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->integer('jumlah_pinjam')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

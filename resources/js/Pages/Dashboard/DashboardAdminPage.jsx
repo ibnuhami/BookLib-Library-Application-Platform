@@ -39,9 +39,6 @@ function DashboardAdminPage(props) {
                 reset()
                 document.getElementById('create_modal').close()
             },
-            // onError: (err) => {
-            //     console.log('Error : ', err)
-            // }
         })
     }
 
@@ -53,7 +50,7 @@ function DashboardAdminPage(props) {
                 header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>}
             >
                 <Head title="Dashboard" />
-                {isAlert && <div role="alert" className="alert alert-success text-white absolute w-96 translate-x-full">
+                {isAlert && <div role="alert" className="alert alert-success text-white w-96 toast toast-center toast-top">
                     <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                     <span>{props.flash.message}</span>
                 </div>}

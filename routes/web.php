@@ -31,7 +31,6 @@ Route::middleware(['auth', 'CheckUser'])->group(function () {
     // Dashboard User Page Route
     Route::get('/dashboard', [UserDashboardPageController::class, 'index'])->name('userDashboard');
 
-
     // Route Konfirmasi Pengembalian Buku
     Route::post('/dashboard/sistem/konfirmasipengembalianbuku/{id}', [UserDashboardPageController::class, 'pengembalian_buku'])->name('kembalibuku');
 });
@@ -57,6 +56,9 @@ Route::middleware(['CheckAdmin', 'auth'])->group(function () {
 
     // Route Konfirmasi Peminjaman Buku
     Route::post('/admin/dasboardPage/sistem/konfirmasipinjambuku/{id}', [AdminDashboardPageController::class, 'konfirmasi_pinjam_buku'])->name('konfirmasipinjam');
+
+    // Route Pembatalan Peminjaman Buku
+    Route::delete('/admin/dashboardPage/sistem/pembatalanpinjam/{id}', [AdminDashboardPageController::class, 'pembatalan_pinjam_buku'])->name('pembatalanpinjam');
 
     // Route Konfirmasi Pengembalian Buku
     Route::post('/admin/dashboardPage/sistem/konfirmasipengembalian/{id}', [AdminDashboardPageController::class, 'konfirmasi_pengembalian_buku'])->name('konfirmasipengembalian');

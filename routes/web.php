@@ -6,8 +6,6 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-// Namespace Controller
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserDashboardPageController;
 use App\Http\Controllers\AdminDashboardPageController;
 
@@ -82,12 +80,5 @@ Route::middleware(['CheckAdmin', 'auth'])->group(function () {
     Route::get('/admin/importbuku', [ImportBookController::class, 'index'])->name('pageimportbuku');
     Route::post('/admin/importbuku', [ImportBookController::class, 'store'])->name('importbuku');
 });
-
-// Profile Route -> saat ini di matikan terlebih dahulu
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
 
 require __DIR__ . '/auth.php';

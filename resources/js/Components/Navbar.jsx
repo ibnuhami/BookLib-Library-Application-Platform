@@ -46,7 +46,7 @@ function Navbar({ auth }) {
         <>
             <div className="navbar bg-white text-gray-800">
                 <div className="flex-1">
-                    <Link className="btn btn-ghost text-xl text-gray-800" href="/">Perpustakaan SMKN 21 Jakarta</Link>
+                    <Link className="btn btn-ghost text-xl text-gray-800" href="/">PerpusID</Link>
                 </div>
                 {isAuth(auth)}
             </div>

@@ -109,9 +109,7 @@ class AdminDashboardPageController extends Controller
             'status' => 'Dipinjam',
         ]);
 
-        return response()->json([
-            "message" => "Success Konfirmasi Pinjam"
-        ]);
+        return redirect()->back()->with('message', 'Berhasil konfirmasi pinjam');
     }
 
     // Function untuk pembatalan buku

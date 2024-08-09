@@ -1,8 +1,6 @@
 <?php
-
-use App\Http\Controllers\DaftarBukuController;
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\ImportBookController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -21,64 +19,57 @@ use App\Http\Controllers\AdminDashboardPageController;
 |
 */
 
-Route::get('/', fn() => Inertia::render('Welcome'));
+Route::get('/', fn() => Inertia::render('Welcome'))
+    ->name('welcome');
 
-// Route User
-// Dashboard User Route
-Route::middleware(['auth', 'CheckUser'])->group(function () {
-    // Dashboard User Page Route
-    Route::get('/dashboard', [UserDashboardPageController::class, 'index'])->name('userDashboard');
-
-    // Route Konfirmasi Pengembalian Buku
-    Route::post('/dashboard/sistem/konfirmasipengembalianbuku/{id}', [UserDashboardPageController::class, 'pengembalian_buku'])->name('kembalibuku');
+Route::controller(UserDashboardPageController::class)->middleware(['auth', 'CheckUser'])->group(function () {
+    Route::get('/dashboard', 'index')
+        ->name('user.dashboard');
 });
 
-// Route Daftar Buku Page
-Route::middleware(['auth'])->group(function () {
-    // Route Daftarbuku page
-    Route::get('/daftarbuku', [DaftarBukuController::class, 'index'])->name('daftarbukupage');
+Route::controller(BookController::class)->middleware(['auth'])->group(function () {
+    Route::get('/book', 'page')
+        ->name('book.page');
 
-    // Route Untuk Mengirim data buku akan dipinjam
-    Route::post('/dashboard/sistem/peminjamanbuku/{id}', [DaftarBukuController::class, 'store'])->name('pinjambuku');
+    Route::post('/reserved/{id}', 'reserved')
+        ->name('book.reserved');
+
+    Route::post('/confirmationreturned/{id}', 'confirmationReturned')
+        ->name('book.confirmationReturned');
+
+    Route::post('/book', 'store')
+        ->name('book.store');
+
+    Route::post('/checkout/{id}', 'checkout')
+        ->name('book.checkout');
+
+    Route::delete('/reject/{id}', 'reject')
+        ->name('book.reject');
+
+    Route::put('/update/{id}', 'update')
+        ->name('book.update');
+
+    Route::delete('/delete/{id}', 'destroy')
+        ->name('book.delete');
 });
 
 
-// Route Admin
-// Dashboard Admin Route
-Route::middleware(['CheckAdmin', 'auth'])->group(function () {
-    // Dashboard Admin Page Route
-    Route::get('/admin/dashboardPage', [AdminDashboardPageController::class, 'index'])->name('adminDashboard');
+Route::controller(AdminDashboardPageController::class)->middleware(['CheckAdmin', 'auth'])->group(function () {
+    Route::get('/admin/dashboard', 'index')
+        ->name('admin.dashboard');
 
-    // Admin store book
-    Route::post('/admin/dashboardPage/sistem/storethebook', [AdminDashboardPageController::class, 'store'])->name('storeBook');
-
-    // Route Konfirmasi Peminjaman Buku
-    Route::post('/admin/dasboardPage/sistem/konfirmasipinjambuku/{id}', [AdminDashboardPageController::class, 'konfirmasi_pinjam_buku'])->name('konfirmasipinjam');
-
-    // Route Pembatalan Peminjaman Buku
-    Route::delete('/admin/dashboardPage/sistem/pembatalanpinjam/{id}', [AdminDashboardPageController::class, 'pembatalan_pinjam_buku'])->name('pembatalanpinjam');
-
-    // Route Konfirmasi Pengembalian Buku
-    Route::post('/admin/dashboardPage/sistem/konfirmasipengembalian/{id}', [AdminDashboardPageController::class, 'konfirmasi_pengembalian_buku'])->name('konfirmasipengembalian');
-
-    // Route Menampilakan page Edit Buku
-    Route::get('/admin/dashboardPage/editbuku', [AdminDashboardPageController::class, 'edit'])->name('editbuku');
-
-    // Route Update buku
-    Route::post('/admin/dashboardPage/editbuku/{id}', [AdminDashboardPageController::class, 'update'])->name('updatebuku');
-
-    // Route Show Buku
-    // Route::get('/admin/dashboardPage/sistem/showbuku/{id}', [AdminDashboardPageController::class, 'show'])->name('showbuku');
-
-    // Route Delete buku
-    Route::delete('/admin/dashboardPage/sistem/deletebuku', [AdminDashboardPageController::class, 'destroy'])->name('deletebuku');
+    Route::get('/admin/dashboard/edit', 'edit')
+        ->name('admin.editpage');
 });
 
 
 // Route Import Buku
-Route::middleware(['CheckAdmin', 'auth'])->group(function () {
-    Route::get('/admin/importbuku', [ImportBookController::class, 'index'])->name('pageimportbuku');
-    Route::post('/admin/importbuku', [ImportBookController::class, 'store'])->name('importbuku');
+Route::controller(ImportBookController::class)->middleware(['CheckAdmin', 'auth'])->group(function () {
+    Route::get('/admin/import', 'index')
+        ->name('import.page');
+
+    Route::post('/admin/import', 'store')
+        ->name('import.store');
 });
 
 require __DIR__ . '/auth.php';

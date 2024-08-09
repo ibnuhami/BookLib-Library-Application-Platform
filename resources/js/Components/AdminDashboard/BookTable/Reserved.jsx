@@ -1,7 +1,6 @@
-import { Link } from '@inertiajs/react'
 import React from 'react'
 
-function TableBukuTersedia({ data }) {
+function Reserved({ data }) {
     return (
         <>
             <div className="overflow-x-auto">
@@ -13,7 +12,7 @@ function TableBukuTersedia({ data }) {
                             <th>Title</th>
                             <th>Author</th>
                             <th>ISBN</th>
-                            <th>Action</th>
+                            <th>Peminjam</th>
                         </tr>
                     </thead>
 
@@ -25,9 +24,7 @@ function TableBukuTersedia({ data }) {
                                     <td>{value.title}</td>
                                     <td>{value.author}</td>
                                     <td>{value.isbn}</td>
-                                    <td>
-                                        <Link as='button' type='button' href={route('editbuku')} data={{ id: value.id }} method='get'>Edit</Link> | <Link type='button' as='button' href={route('deletebuku')} data={{ id: value.id }} method='delete' >Delete</Link>
-                                    </td>
+                                    <td>{value.peminjam}</td>
                                 </tr>
                             ))
                         }
@@ -39,4 +36,4 @@ function TableBukuTersedia({ data }) {
     )
 }
 
-export default TableBukuTersedia
+export default Reserved

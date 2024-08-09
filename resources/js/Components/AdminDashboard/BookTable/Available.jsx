@@ -1,6 +1,7 @@
+import { Link } from '@inertiajs/react'
 import React from 'react'
 
-function TableBukuDipinjam({ data }) {
+function Available({ data }) {
     return (
         <>
             <div className="overflow-x-auto">
@@ -12,7 +13,7 @@ function TableBukuDipinjam({ data }) {
                             <th>Title</th>
                             <th>Author</th>
                             <th>ISBN</th>
-                            <th>Peminjam</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
 
@@ -24,7 +25,9 @@ function TableBukuDipinjam({ data }) {
                                     <td>{value.title}</td>
                                     <td>{value.author}</td>
                                     <td>{value.isbn}</td>
-                                    <td>{value.peminjam}</td>
+                                    <td>
+                                        <Link as='button' type='button' href={route('admin.editpage')} data={{ id: value.id }} method='get'>Edit</Link> | <Link type='button' as='button' href={route('book.delete', value.id)} method='delete' >Delete</Link>
+                                    </td>
                                 </tr>
                             ))
                         }
@@ -36,4 +39,4 @@ function TableBukuDipinjam({ data }) {
     )
 }
 
-export default TableBukuDipinjam
+export default Available

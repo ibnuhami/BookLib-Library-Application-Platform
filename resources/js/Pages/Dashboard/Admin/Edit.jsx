@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { useForm } from '@inertiajs/react';
+import { Link, useForm } from '@inertiajs/react';
 
-const EditPage = (props) => {
+const Edit = (props) => {
     console.log(props)
     const data = props.data
     const { data: dataEdit, setData, post, reset, processing } = useForm({
@@ -49,6 +49,7 @@ const EditPage = (props) => {
                         </label>
 
                         <button type="submit" className="btn bg-gray-800 text-white my-4 mx-1 hover:text-gray-800 hover:bg-white" disabled={processing}>Submit</button>
+                        <button onClick={() => window.history.back()} type="submit" className="btn bg-white text-gray-800 my-4 mx-1 hover:text-white hover:bg-gray-800" disabled={processing}>Back</button>
                     </form>
                 </div>
             </div>
@@ -57,4 +58,4 @@ const EditPage = (props) => {
     )
 }
 
-export default EditPage
+export default Edit

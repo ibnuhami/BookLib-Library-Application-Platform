@@ -1,18 +1,20 @@
 import React from 'react'
+import { router } from '@inertiajs/react'
 
-function TableBukuKonfirmasiPengembalian({ data }) {
-    const submitKonfirmasi = (id) => {
-        const url = route('konfirmasipengembalian', id)
-        axios.post(url)
-            .then(res => {
-                window.location.reload(true)
-            })
-            .catch(err => {
-                console.log('Error : ', err)
-            })
+function Checkout(props) {
+    const data = props.data
+
+    const submitPembatalan = (id) => {
+        console.log("Data : ", id)
+        const url = route('pembatalanpinjam', id)
+        router.delete(url)
     }
 
-    // Code yang akan tampil di website
+    const submitKonfirmasi = (id) => {
+        const url = route('konfirmasipinjam', id)
+        router.post(url)
+    }
+
     return (
         <>
             <div className="overflow-x-auto">
@@ -24,7 +26,7 @@ function TableBukuKonfirmasiPengembalian({ data }) {
                             <th>Author</th>
                             <th>ISBN</th>
                             <th>Peminjam</th>
-                            <th>Action</th>
+                            <th rowSpan="2" className='text-center'>Action</th>
                         </tr>
                     </thead>
 
@@ -37,8 +39,11 @@ function TableBukuKonfirmasiPengembalian({ data }) {
                                     <td>{value.author}</td>
                                     <td>{value.isbn}</td>
                                     <td>{value.peminjam}</td>
-                                    <td>
-                                        <button type='submit' onClick={() => submitKonfirmasi(value.id)}>
+                                    <td className='text-center'>
+                                        <button type='submit' className='btn btn-sm mx-1 btn-error text-white' onClick={() => submitPembatalan(value.id)}>
+                                            Cancel
+                                        </button>
+                                        <button type='submit' className='btn btn-sm mx-1 btn-primary text-white' onClick={() => submitKonfirmasi(value.id)}>
                                             Confirm
                                         </button>
                                     </td>
@@ -53,4 +58,4 @@ function TableBukuKonfirmasiPengembalian({ data }) {
     )
 }
 
-export default TableBukuKonfirmasiPengembalian
+export default Checkout

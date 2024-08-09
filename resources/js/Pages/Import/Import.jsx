@@ -2,8 +2,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 import { useForm } from '@inertiajs/react';
 import React, { useEffect, useState } from 'react'
 
-const ImportPage = (props) => {
-
+const Import = (props) => {
     const { post, file, setData } = useForm({
         'file': null,
     })
@@ -79,4 +78,4 @@ const ImportPage = (props) => {
     )
 }
 
-export default ImportPage
+export default Import

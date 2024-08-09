@@ -2,20 +2,19 @@ import AuthenticatedLayout from '../../Layouts/AuthenticatedLayout'
 import React, { useEffect, useState } from 'react';
 import { Head, useForm } from '@inertiajs/react';
 
-import TableBukuKonfirmasiPinjam from '@/Components/AdminDashboard/Table/TableBukuKonfirmasiPinjam';
-import TableBukuKonfirmasiPengembalian from '@/Components/AdminDashboard/Table/TableBukuKonfirmasiPengembalian';
-import TableBukuDipinjam from '@/Components/AdminDashboard/Table/TableBukuDipinjam';
-import TableBukuTersedia from '@/Components/AdminDashboard/Table/TableBukuTersedia';
+import TableBukuKonfirmasiPinjam from '@/Components/AdminDashboard/BookTable/Checkout';
+import TableBukuKonfirmasiPengembalian from '@/Components/AdminDashboard/BookTable/ConfirmationReturned';
+import TableBukuDipinjam from '@/Components/AdminDashboard/BookTable/Reserved';
+import TableBukuTersedia from '@/Components/AdminDashboard/BookTable/Available';
 import Paginator from '@/Components/AdminDashboard/item/Paginator';
 
-function DashboardAdminPage(props) {
+function Admin(props) {
     const [isAlert, setIsAlert] = useState(false)
 
     useEffect(() => {
         HandleAlert(props.flash.message)
     }, [])
 
-    // Create Data Buku
     const { data, setData, post, processing, reset } = useForm({
         title: '',
         author: '',
@@ -34,7 +33,7 @@ function DashboardAdminPage(props) {
 
     const submit = (e) => {
         e.preventDefault()
-        post(route('storeBook'), {
+        post(route('book.store'), {
             onSuccess: () => {
                 reset()
                 document.getElementById('create_modal').close()
@@ -148,4 +147,4 @@ function DashboardAdminPage(props) {
     )
 }
 
-export default DashboardAdminPage
+export default Admin

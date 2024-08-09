@@ -11,7 +11,7 @@ class ImportBookController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Import/ImportPage');
+        return Inertia::render('Import/Import');
     }
 
     public function store(Request $request)

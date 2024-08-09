@@ -16,33 +16,10 @@ class UserDashboardPageController extends Controller
     public function index()
     {
         $book_tersedia = new BookCollection(Book::where('status', 'Tersedia')->paginate(10));
-
-        return Inertia::render('Dashboard/DashboardUserPage', [
+        return Inertia::render('Dashboard/User', [
             "auth" => auth()->user(),
             "book_tersedia" => $book_tersedia,
             "buku_dipesan" => Book::where('status', "Dipinjam")->where('peminjam', auth()->user()->name)->get()
         ]);
-    }
-
-    // (route konfirmasipengembalian)
-    public function pengembalian_buku($id)
-    {
-        $data = Book::find($id);
-        if ($data) {
-            Book::where('id', $id)->update([
-                'status' => 'Konfirmasi_pengembalian',
-                'peminjam' => auth()->user()->name
-            ]);
-
-            return response()->json([
-                "status" => 200,
-                "message" => "Pengembalian akan di Validasi"
-            ]);
-        } else {
-            return response()->json([
-                "status" => 404,
-                "message" => "Data tidak ditemukan"
-            ]);
-        }
     }
 }

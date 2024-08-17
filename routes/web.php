@@ -63,7 +63,6 @@ Route::controller(AdminDashboardPageController::class)->middleware(['CheckAdmin'
 });
 
 
-// Route Import Buku
 Route::controller(ImportBookController::class)->middleware(['CheckAdmin', 'auth'])->group(function () {
     Route::get('/admin/import', 'index')
         ->name('import.page');

@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 import Paginator from '@/Components/AdminDashboard/item/Paginator'
-import { usePage, router } from '@inertiajs/react'
+import { router } from '@inertiajs/react'
 
-const DaftarBuku = () => {
-    const { props } = usePage()
-
+const DaftarBuku = (props) => {
     const [Search, SetSearch] = useState('')
     const [bookTersedia, setBookTersedia] = useState(props.book_tersedia?.data || [])
 
@@ -57,6 +55,7 @@ const DaftarBuku = () => {
             </>
         )
     }
+    
     return (
         <AuthenticatedLayout
             user={props.auth.user}

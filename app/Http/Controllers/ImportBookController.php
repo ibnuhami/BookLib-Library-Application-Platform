@@ -16,12 +16,7 @@ class ImportBookController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request);
-        // try {
         Excel::import(new BookImport, $request->file('file'));
-        return redirect(route('adminDashboard'))->with('message', 'Berhasil Import Buku');
-        // } catch (\Throwable $e) {
-        //     return back()->with('message', $e);
-        // }
+        return redirect(route('adminDashboard'))->with('message', 'Berhasil Melakukan Import Import Buku');
     }
 }

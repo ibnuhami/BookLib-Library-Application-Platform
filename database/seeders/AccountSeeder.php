@@ -18,16 +18,15 @@ class AccountSeeder extends Seeder
             'name' => 'Admin',
             'nis' => 123,
             'email' => 'admin@example.com',
-            'password' => Hash::make('admin@123'), // Enkripsi kata sandi
-            'isAdmin' => true, // Atau kolom lain yang menandakan bahwa ini adalah akun admin
+            'password' => Hash::make('admin@123'),
+            'type' => 'admin'
         ]);
 
         User::create([
             'name' => 'User',
             'nis' => 456,
             'email' => 'user@example.com',
-            'password' => Hash::make('user@123'), // Enkripsi kata sandi
-            'isAdmin' => false, // Atau kolom lain yang menandakan bahwa ini adalah akun admin
+            'password' => Hash::make('user@123'),
         ]);
     }
 }

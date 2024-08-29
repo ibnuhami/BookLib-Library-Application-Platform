@@ -16,7 +16,7 @@ function Navbar({ auth }) {
             )
         }
     }
-    
+
     const isAuth = (user) => {
 
         if (user) {
@@ -49,7 +49,7 @@ function Navbar({ auth }) {
         <>
             <div className="navbar bg-white text-gray-800">
                 <div className="flex-1">
-                    <Link className="btn btn-ghost text-xl text-gray-800" href="/">Perpustakaan Digital</Link>
+                    <Link className="btn btn-ghost text-xl text-gray-800" href="/">BookLib</Link>
                 </div>
                 {isAuth(auth)}
             </div>

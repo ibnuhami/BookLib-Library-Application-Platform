@@ -31,9 +31,6 @@ Route::controller(BookController::class)->middleware(['auth'])->group(function (
     Route::get('/book', 'page')
         ->name('book.page');
 
-    Route::post('/reserved/{id}', 'reserved')
-        ->name('book.reserved');
-
     Route::post('/confirmationreturned/{id}', 'confirmationReturned')
         ->name('book.confirmationReturned');
 
@@ -43,7 +40,7 @@ Route::controller(BookController::class)->middleware(['auth'])->group(function (
     Route::post('/checkout/{id}', 'checkout')
         ->name('book.checkout');
 
-    Route::delete('/reject/{id}', 'reject')
+    Route::delete('/reject/{id}', 'rejectConfirmation')
         ->name('book.reject');
 
     Route::put('/update/{id}', 'update')
@@ -51,6 +48,18 @@ Route::controller(BookController::class)->middleware(['auth'])->group(function (
 
     Route::delete('/delete/{id}', 'destroy')
         ->name('book.delete');
+
+    Route::get('/book/available', 'getAvailableBook')
+        ->name('book.available');
+
+    Route::get('/book/checkout', 'getCheckoutBook')
+        ->name('book.checkout');
+
+    Route::get('/book/reserved', 'getReservedBook')
+        ->name('book.reserved');
+
+    Route::get('/book/lost', 'getLostBook')
+        ->name('book.lost');
 });
 
 

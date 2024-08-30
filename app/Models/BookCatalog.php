@@ -15,11 +15,11 @@ class BookCatalog extends Model
 
     public function BookDetail() : HasOne
     {
-        return $this->hasOne(BookDetail::class);
+        return $this->hasOne(BookDetail::class, 'inventory_id', 'inventory_id');
     }
 
     public function BookFilter(): BelongsTo
     {
-        return $this->belongsTo(BookFilter::class);
+        return $this->belongsTo(BookFilter::class, 'id', 'status');
     }
 }

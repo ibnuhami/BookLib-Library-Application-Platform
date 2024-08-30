@@ -12,13 +12,12 @@ class UserDashboardPageController extends Controller
     // Index function => merender dashboard page untuk user
     public function index()
     {
-        $book_available = new BookCollection(BookCatalog::where('status', 'Tersedia')->paginate(10));
-        $check_borrower = BookCatalog::where('status', "Dipinjam")->where('peminjam', auth()->user()->name)->get();
+        $book_available = new BookCollection(BookCatalog::where('status', 'available')->paginate(10));
+        $book_reserved = BookCatalog::where('user', auth()->user()->name);
 
         return Inertia::render('Dashboard/User', [
-            "auth" => auth()->user(),
             "book_available" => $book_available,
-            "book_checkout" => $check_borrower
+            "book_reserved" => $book_reserved
         ]);
     }
 }

@@ -14,6 +14,6 @@ class BookFilter extends Model
 
     public function BookCatalog (): HasMany
     {
-        return $this->hasMany(BookCatalog::class);
+        return $this->hasMany(BookCatalog::class, 'status', 'id');
     }
 }

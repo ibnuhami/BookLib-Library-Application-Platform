@@ -45,11 +45,73 @@ class BookSeeder extends Seeder
                 'language' => 'English',
                 'location' => 'Shelf B2',
             ],
+            [
+                'isbn' => '9781234567897',
+                'title' => 'Laravel for Beginners',
+                'author' => 'John Doe',
+                'synopsis' => 'An introduction to Laravel framework.',
+                'language' => 'English',
+                'location' => 'Shelf A1',
+            ],
+            [
+                'isbn' => '9782345678901',
+                'title' => 'Advanced PHP Programming',
+                'author' => 'Jane Smith',
+                'synopsis' => 'Deep dive into PHP for advanced users.',
+                'language' => 'English',
+                'location' => 'Shelf A2',
+            ],
+            [
+                'isbn' => '9783456789012',
+                'title' => 'Web Development with Vue.js',
+                'author' => 'Alice Johnson',
+                'synopsis' => 'Learn Vue.js step by step.',
+                'language' => 'English',
+                'location' => 'Shelf B1',
+            ],
+            [
+                'isbn' => '9784567890123',
+                'title' => 'Mastering React',
+                'author' => 'Bob Brown',
+                'synopsis' => 'Comprehensive guide to React.js.',
+                'language' => 'English',
+                'location' => 'Shelf B2',
+            ],
+            [
+                'isbn' => '9781234567897',
+                'title' => 'Laravel for Beginners',
+                'author' => 'John Doe',
+                'synopsis' => 'An introduction to Laravel framework.',
+                'language' => 'English',
+                'location' => 'Shelf A1',
+            ],
+            [
+                'isbn' => '9782345678901',
+                'title' => 'Advanced PHP Programming',
+                'author' => 'Jane Smith',
+                'synopsis' => 'Deep dive into PHP for advanced users.',
+                'language' => 'English',
+                'location' => 'Shelf A2',
+            ],
+            [
+                'isbn' => '9783456789012',
+                'title' => 'Web Development with Vue.js',
+                'author' => 'Alice Johnson',
+                'synopsis' => 'Learn Vue.js step by step.',
+                'language' => 'English',
+                'location' => 'Shelf B1',
+            ],
+            [
+                'isbn' => '9784567890123',
+                'title' => 'Mastering React',
+                'author' => 'Bob Brown',
+                'synopsis' => 'Comprehensive guide to React.js.',
+                'language' => 'English',
+                'location' => 'Shelf B2',
+            ],
         ];
 
-        DB::table('tb_books_detail')->insert($books);
-
-        DB::table('tb_books_filter')->insert([
+        $filter = [
             [
                 'status' => 'available'
             ],
@@ -62,25 +124,17 @@ class BookSeeder extends Seeder
             [
                 'status' => 'lost'
             ],
-        ]);
+        ];
 
-        DB::table('tb_books_catalog')->insert([
-            [
-                'inventory_id' => 1,
-                'status' => 1,
-            ],
-            [
-                'inventory_id' => 2,
-                'status' => 2,
-            ],
-            [
-                'inventory_id' => 3,
-                'status' => 3,
-            ],
-            [
-                'inventory_id' => 4,
-                'status' => 4,
-            ],
-        ]);
+        DB::table('tb_books_filter')->insert($filter);
+
+        foreach($books as $book) {
+            $id = DB::table('tb_books_detail')->insertGetId($book);
+
+            DB::table('tb_books_catalog')->insert([
+                'status' => rand(1, count($filter)),
+                'inventory_id' => $id
+            ]);
+        }
     }
 }

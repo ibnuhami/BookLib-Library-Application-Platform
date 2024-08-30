@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const Table = (props) => {
-    // const props_data = props.data?.data?.data ?? []
     // const props_links = props.data?.data?.links ?? []
     // const props_meta = props.data?.data?.meta ?? []
 
-    const data = props.data?.data?.data ?? []
+    const data = props.data?.data?.data ?? [];
+    const booksCatalog = data[0]?.book_catalog ?? [];
 
-    console.log(data)
+    console.log(booksCatalog);
 
     return (
         <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
@@ -15,32 +15,33 @@ const Table = (props) => {
                 <table className="w-full table-auto">
                     <thead>
                         <tr className="bg-gray-2 text-left dark:bg-meta-4">
-                            <th className="min-w-[220px] py-4 px-4 font-medium text-black xl:pl-11">
+                            <th className="min-w-[100px] py-4 px-4 text-slate-800 font-bold xl:pl-11">
                                 No
                             </th>
-                            <th className="min-w-[150px] py-4 px-4 font-medium text-black">
+                            <th className="min-w-[250px] py-4 px-4 text-slate-800 font-bold">
                                 Title
                             </th>
-                            <th className="min-w-[120px] py-4 px-4 font-medium text-black">
+                            <th className="min-w-[120px] py-4 px-4 text-slate-800 font-bold">
                                 See Detail
                             </th>
-                            <th className="py-4 px-4 font-medium text-black">
+                            <th className="py-4 px-4 text-slate-800 font-bold">
                                 Actions
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        {data?.map((packageItem, key) => (
-                            <tr key={key}>
-                                <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
-                                    <p className="text-sm">
-                                        {key + 1}
-                                    </p>
+                        {booksCatalog.length === 0 ?
+                            <tr className="text-slate-800">
+                                <td className="text-center" colSpan="4" >No Have Data</td>
+                            </tr>
+                        :
+                            booksCatalog.map((packageItem, key) => (
+                            <tr key={key} className="text-slate-800">
+                                <td className="border-b border-[#eee] py-5 pl-9 dark:border-strokedark xl:pl-11">
+                                    <p className="text-sm">{key + 1}</p>
                                 </td>
-                                <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                                    <p className="text-black">
-                                        {packageItem.title}
-                                    </p>
+                                <td className="border-b border-[#eee] py-5 dark:border-strokedark">
+                                    <p>{packageItem.book_detail.title}</p>
                                 </td>
                                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                                     <button>See Detail</button>

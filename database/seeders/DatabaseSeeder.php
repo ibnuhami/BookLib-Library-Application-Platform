@@ -14,17 +14,9 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        \App\Models\User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@gmail.com',
-            'password' => '12345678',
-            'isAdmin' => '1',
-        ]);
-        \App\Models\User::factory()->create([
-            'name' => 'aufa',
-            'email' => 'aufa@gmail.com',
-            'password' => '12345678',
-            'isAdmin' => '0',
+        $this->call([
+            BookSeeder::class,
+            AccountSeeder::class
         ]);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\BookCollection;
 use App\Models\BookCatalog;
+use App\Models\BookFilter;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -68,28 +69,28 @@ class BookController extends Controller
 
     public function getAvailableBook()
     {
-        $book_available = new BookCollection(BookCatalog::where('status', 'available')->paginate(20));
+        $book_available = new BookCollection(BookFilter::with('BookCatalog')->where('status', 'available')->get());
 
         return $book_available;
     }
 
     public function getCheckoutBook()
     {
-        $book_checkout = new BookCollection(BookCatalog::where('status', 'checkout')->paginate(20));
+        $book_checkout = new BookCollection(BookFilter::where('status', 'checkout')->get());
 
         return $book_checkout;
     }
 
     public function getReservedBook()
     {
-        $book_reserved = new BookCollection(BookCatalog::where('status', 'reserved')->paginate(20));
+        $book_reserved = new BookCollection(BookFilter::where('status', 'reserved')->get());
 
         return $book_reserved;
     }
 
     public function getLostBook()
     {
-        $book_lost = new BookCollection(BookCatalog::where('status', 'lost')->paginate(20));
+        $book_lost = new BookCollection(BookFilter::where('status', 'lost')->get());
 
         return $book_lost;
     }

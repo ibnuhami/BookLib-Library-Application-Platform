@@ -15,7 +15,7 @@ class CheckAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!auth()->user()->type === 'admin' && auth()->check()) {
+        if (auth()->user()->type !== 'admin') {
             abort(404);
         }
 

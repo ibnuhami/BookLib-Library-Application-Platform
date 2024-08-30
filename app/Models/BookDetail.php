@@ -23,6 +23,6 @@ class BookDetail extends Model
 
     public function BookCatalog() : BelongsTo
     {
-        return $this->belongsTo(BookCatalog::class);
+        return $this->belongsTo(BookCatalog::class, 'inventory_id', 'inventory_id');
     }
 }

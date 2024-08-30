@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('tb_books_detail', function (Blueprint $table) {
-            $table->id('inventory_id');
+            $table->id('inventory_id')->unique();
             $table->string('isbn', 13);
             $table->string('title', 50);
             $table->string('author', 50);
@@ -28,8 +28,9 @@ return new class extends Migration {
 
         Schema::create('tb_books_catalog', function (Blueprint $table) {
             $table->id('catalog_id');
-            $table->unsignedBigInteger('inventory_id');
+            $table->unsignedBigInteger('inventory_id')->unique();
             $table->unsignedInteger('status');
+            $table->string('user', 45)->nullable();
             $table->timestamps();
 
             $table->foreign('inventory_id')->references('inventory_id')->on('tb_books_detail')->onDelete('cascade');
